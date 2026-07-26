@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineSuggest | Movie Recommendations</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" onclick="switchPage('home')">
+        <span class="logo-pop">CINE</span>SUGGEST
+      </a>
+
+      <nav class="nav-links">
+        <a href="#" id="nav-home" class="nav-item active" onclick="switchPage('home')">Home</a>
+        <a href="#" id="nav-movies" class="nav-item" onclick="switchPage('movies')">Movies</a>
+        <a href="#" id="nav-series" class="nav-item" onclick="switchPage('series')">Web Series</a>
+        <a href="#" id="nav-popular" class="nav-item" onclick="switchPage('popular')">Popular</a>
+        <a href="#" id="nav-mylist" class="nav-item" onclick="switchPage('mylist')">My List <span id="watchlistCount" class="badge">0</span></a>
+      </nav>
+
+      <div class="nav-controls">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search title...">
+        </div>
+        <div class="filter-wrapper">
+          <span class="filter-label">Category</span>
+          <select id="genreSelect">
+            <option value="All">All Categories</option>
+            <option value="Action">Action</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Crime">Crime</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+          </select>
+        </div>
+
+        <div class="auth-box" id="authBox">
+          <button class="btn btn-login" onclick="openAuthModal('login')">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h2 id="pageTitle">Featured Movies & Shows</h2>
+      <p id="pageDescription">Top-rated picks sorted dynamically by audience ratings.</p>
+    </div>
+
+    <div id="moviesGrid" class="movies-grid"></div>
+  </main>
+
+  <!-- Trailer Modal -->
+  <div id="trailerModal" class="modal">
+    <div class="modal-content trailer-content">
+      <span class="close-btn" onclick="closeTrailerModal()">&times;</span>
+      <h3 id="trailerTitle" style="margin-bottom: 15px;">Movie Trailer</h3>
+      <div class="video-container">
+        <iframe id="trailerFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal">
+    <div class="modal-content auth-content">
+      <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+      
+      <form id="loginForm" class="auth-form">
+        <h2>Sign In</h2>
+        <div class="form-group">
+          <label>Email Address:</label>
+          <input type="email" id="loginEmail" required placeholder="user@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn">Sign In</button>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="toggleAuthMode('register')">Sign Up now</a></p>
+      </form>
+
+      <form id="registerForm" class="auth-form" style="display: none;">
+        <h2>Create Account</h2>
+        <div class="form-group">
+          <label>Full Name:</label>
+          <input type="text" id="regName" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Email Address:</label>
+          <input type="email" id="regEmail" required placeholder="user@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <input type="password" id="regPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <p class="auth-switch">Already registered? <a href="#" onclick="toggleAuthMode('login')">Sign In</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="reviewCloseBtn">&times;</span>
+      <h2 id="modalMovieTitle">Movie Title</h2>
+      <p id="modalMovieDesc" class="movie-desc"></p>
+
+      <div class="reviews-section">
+        <h3>User Reviews</h3>
+        <div id="reviewsList" class="reviews-list"></div>
+      </div>
+
+      <hr>
+
+      <form id="reviewForm">
+        <h3>Add Your Review</h3>
+        <input type="hidden" id="modalMovieId">
+        
+        <div class="form-group">
+          <label>Your Name:</label>
+          <input type="text" id="author" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label>Rating (1-10):</label>
+          <input type="number" id="rating" min="1" max="10" step="0.1" required placeholder="8.5">
+        </div>
+
+        <div class="form-group">
+          <label>Comment:</label>
+          <textarea id="comment" required placeholder="Write your thoughts..."></textarea>
+        </div>
+
+        <button type="submit" class="btn">Submit Review</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/views.js"></script>
+</body>
+</html>
